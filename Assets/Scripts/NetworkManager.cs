@@ -54,8 +54,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             GUI.Box(new Rect(10, 45 + (i * 30), 100, 30), roomList[i].Name);
             GUI.Box(new Rect(110, 45 + (i * 30), 100, 30), roomList[i].IsOpen.ToString());
             GUI.Box(new Rect(210, 45 + (i * 30), 100, 30), string.Format("{0}/{1}", roomList[i].PlayerCount, roomList[i].MaxPlayers));
-            
-            
+
+            if (GUI.Button(new Rect(310, 45 + (i * 30), 100, 30), "Join"))
+            {
+                PhotonNetwork.JoinRoom(roomList[i].Name);
+            }
         }
     }
 
@@ -76,8 +79,29 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         this.roomList = roomList;
     }
 
+    public GameObject player;
+    public PhotonView view;
+    
+
     public override void OnJoinedRoom()
     {
-        Debug.Log("connect to room");
+        SpawnPlayer();
+
+        view = gameObject.GetComponent<PhotonView>();
+
+        //if (view.IsMine)
+        //{
+            GameObject go =  PhotonNetwork.Instantiate(playerName, Vector3.zero, Quaternion.identity) as GameObject;
+
+            if (go.GetComponent<PhotonView>().IsMine)
+                go.GetComponent<Renderer>().material.color = Color.green;
+        //}
+
+    }
+
+    public void SpawnPlayer()
+    {
+        GameObject go = Instantiate(player) as GameObject;
+        //go.GetComponent<PhotonView>().ViewID = 10 + PhotonNetwork.CurrentRoom.PlayerCount;
     }
 }
