@@ -258,6 +258,9 @@
  <Reference Include="websocket-sharp">
  <HintPath>C:/unity3d/shootGame/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
  </Reference>
+ <Reference Include="UnityNpgsql">
+ <HintPath>C:/unity3d/shootGame/Assets/Plugins/UnityNpgsql.dll</HintPath>
+ </Reference>
  <Reference Include="nunit.framework">
  <HintPath>C:/unity3d/shootGame/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
  </Reference>
